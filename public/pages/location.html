@@ -1,0 +1,28 @@
+<div class="container app-location" ng-cloak>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Synchronized Locations In Google Map</h3>
+        </div>
+        <div class="panel-body">
+            <div class="container table-responsive" ng-if="locations.length != 0">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Serial No</th>
+                            <th>Origin</th>
+                            <th>Destination</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="n in locations track by $index">
+                        <tr class="info" ng-click="displayRoute(n)">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{n.origin}}</td>
+                            <td>{{n.destination}}</td>
+                        </tr>
+                    </tbody>
+                </table>   
+            </div>
+            <div class="watermark" ng-if="locations.length == 0">No Syncronized Record available</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="container" ng-cloak>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">AngularJs App Integrating Google Map</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="container" style="height: 70%;">
+                            <br/>
+                            <ng-map default-style="false" zoom="10" tilt="45" center="Kolkata, West Bengal, India">
+                                <directions draggable="true" panel="directions-panel" origin="{{origin}}" waypoints="{{waypoints}}" on-directions_changed="directionsChanged(evt)"
+                                    destination="{{destination}}">
+                                </directions>
+                                <street-view-panorama container="streetview"></street-view-panorama>
+                            </ng-map>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="container">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Origin:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="from" places-auto-complete ng-model="origin" size=40 />                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Destination:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="to" places-auto-complete ng-model="destination" size=40 />
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="waypoints.length == 0">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="button" ng-click="addNewWaypoints()" class="btn btn-default">Add Waypoints</button>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-repeat="n in waypoints track by $index">
+                                    <label class="col-sm-2 control-label">Waypoints {{ $index + 1 }}:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" placeholder="waypoints" places-auto-complete ng-model="n.location" size=40 />
+                                    </div>
+                                    <div class="col-sm-2" ng-show="$last">
+                                        <button type="button" class="btn btn-default btn-md" ng-click="addNewWaypoints()">
+											   <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+											</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" ng-click="sync()" class="btn btn-default">Sync Location</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <br style="clear:both" />
+                    <a href="" ng-click="showDirectionsPanel = !showDirectionsPanel">
+							{{showDirectionsPanel ? 'Hide' : 'Show'}} Detailed Directions
+						</a>
+                    <br style="clear:both" />
+                    <div id="directions-panel" class="well" ng-show="showDirectionsPanel" style="display:inline-block;width:90%;height: 700px; overflow: auto; padding: 0px 5px;"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer"></div>
+    </div>
+</div>
+<div id="message"><span class="glyphicon glyphicon-exclamation-sign" style="margin-right: 5px" aria-hidden="true"></span>Successfully Syncronized
+    to database...</div>
