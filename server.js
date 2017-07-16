@@ -8,6 +8,7 @@ var methodOverride = require('method-override');
 
 
 app.use(express.static('./public'));
+app.use(express.static('./bower_components'));
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
